@@ -1,0 +1,61 @@
+$toolbar-size: 52px;
+@mixin imgPos($pos1, $pos2){
+    background-position: 0 $pos1;
+    &:hover{
+        background-position: 0 $pos2;
+    }
+}
+@import "mixin";
+.toolbar{
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+}
+.toolbar-item, .toolbar-layer{
+    background: url(../img/toolbar.png) no-repeat;
+}
+.toolbar-item{
+    width: $toolbar-size;
+    height: $toolbar-size;
+    display: block;
+    cursor: pointer;
+    @include transition(background-position 1s);
+    position: relative;
+    margin-top: 1px;
+    &:hover{
+        .toolbar-layer{
+            @include opacity(1);
+            @include transform(scale(1));
+        }
+    }
+}
+.toolbar-weixin{
+    @include imgPos(-798px, -860px);
+    .toolbar-layer{
+        background-position: 0 0;
+        height: 212px;
+    }
+}
+.toolbar-feedback{
+    @include imgPos(-426px, -488px);
+}
+.toolbar-app{
+    @include imgPos(-550px, -612px);
+    .toolbar-layer{
+        background-position: 0 -222px;
+        height: 194px;
+    }
+}
+.toolbar-backtop{
+    @include imgPos(-674px, -736px);
+}
+.toolbar-layer{
+    width: 172px;
+    position: absolute;
+    right: $toolbar-size - 6;
+    bottom: -10px;
+    @include opacity(0);
+    @include transform-origin(right bottom);
+    @include transform(scale(0.01));
+    @include transition(all 1s);
+}
